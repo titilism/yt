@@ -1,0 +1,45 @@
+
+    const API_KEY = "AIzaSyAkcSBM7e5ht7VjtLQzuKYewMI2lr1aif4"; // 👉 apna YouTube API key yahan daalo
+
+    function searchVideos() {
+      const query = document.getElementById("search").value.trim();
+      if (!query) {
+        alert("Please enter a search term!");
+        return;
+      }
+
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=10&key=${API_KEY}`;
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          const results = document.getElementById("results");
+          results.innerHTML = ""; // clear old results
+
+          if (data.items) {
+            data.items.forEach(item => {
+              const vid = item.id.videoId;
+              const title = item.snippet.title;
+              const desc = item.snippet.description;
+
+              const div = document.createElement("div");
+              div.innerHTML = `
+                <h3>${title}</h3>
+                <p>${desc}</p>
+                <iframe width="400" height="225"
+                  src="https://www.youtube.com/embed/${vid}"
+                  frameborder="0" allowfullscreen>
+                </iframe>
+              `;
+              results.appendChild(div);
+            });
+          } else {
+            results.innerHTML = "<p>No results found or API error.</p>";
+          }
+        })
+        .catch(err => {
+          console.error("API Error:", err);
+          document.getElementById("results").innerHTML = "<p>Failed to fetch results. Check console.</p>";
+        });
+    }
+  
