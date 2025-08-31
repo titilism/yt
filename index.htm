@@ -1,4 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube API Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #results div {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    iframe {
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>YouTube Search API Test</h1>
 
+  <input type="text" id="search" placeholder="Search YouTube..." size="40">
+  <button onclick="searchVideos()">Search</button>
+
+  <div id="results"></div>
+
+  <script>
     const API_KEY = "AIzaSyAkcSBM7e5ht7VjtLQzuKYewMI2lr1aif4"; // 👉 apna YouTube API key yahan daalo
 
     function searchVideos() {
@@ -42,4 +73,6 @@
           document.getElementById("results").innerHTML = "<p>Failed to fetch results. Check console.</p>";
         });
     }
-  
+  </script>
+</body>
+</html>
