@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Affirmation Fetch Test</title>
+</head>
+<body>
+  <h1>🌸 Daily Affirmation 🌸</h1>
+  <p id="quote">Loading...</p>
+  <button onclick="loadAffirmation()">New Affirmation</button>
+
+  <script>
+    async function loadAffirmation() {
+      try {
+        const res = await fetch("https://www.affirmations.dev/");
+        const data = await res.json();
+        document.getElementById("quote").textContent = data.affirmation;
+      } catch (err) {
+        console.error("Error:", err);
+        document.getElementById("quote").textContent = "⚠️ Failed to load affirmation!";
+      }
+    }
+
+    // Page load pe ek bar call
+    loadAffirmation();
+  </script>
+</body>
+</html>
